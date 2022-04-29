@@ -61,3 +61,6 @@ Update-AzVmss `
     -ResourceGroupName "myResourceGroup" `
     -Name "myScaleSet" `
     -VirtualMachineScaleSet $vmss
+
+# Clean up
+Remove-AzResourceGroup -Name "myResourceGroup" -Force -AsJob
