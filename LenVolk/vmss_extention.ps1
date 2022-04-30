@@ -13,8 +13,8 @@ $vmss = Get-AzVmss `
     -VMScaleSetName "myScaleSet"
 
 # Use Custom Script Extension to install custom extension
-$vmss = Add-AzVmssExtension 
--VirtualMachineScaleSet $vmss `
+$vmss = Add-AzVmssExtension `
+    -VirtualMachineScaleSet $vmss `
     -Name $extensionname `
     -Publisher "Microsoft.Compute" `
     -Type "CustomScriptExtension" `
@@ -47,8 +47,8 @@ $customConfigv2 = @{
     "commandToExecute" = "powershell -ExecutionPolicy Unrestricted -File notepad821.ps1"
 }
 
-$vmss = Add-AzVmssExtension 
--VirtualMachineScaleSet $vmss `
+$vmss = Add-AzVmssExtension `
+    -VirtualMachineScaleSet $vmss `
     -Name $extensionname `
     -Publisher "Microsoft.Compute" `
     -Type "CustomScriptExtension" `
