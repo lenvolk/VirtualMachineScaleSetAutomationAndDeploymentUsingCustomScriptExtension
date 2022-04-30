@@ -1,0 +1,32 @@
+# trigger:
+# - master
+trigger: none
+pr: none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+- name: 'VMresourceGroup'
+  value: 'Lab1HPRG'
+- name: 'SAresourceGroup'
+  value: 'AIBManagedIDRG'
+- name: 'storageAccount'
+  value: 'lvolksoftwarebuild'
+- name: 'container'
+  value: 'tstsoftware'
+- name: 'blob'
+  value: 'vlc.zip'
+steps:
+- task: AzurePowerShell@5
+  inputs:
+    azureSubscription: 'tf-lvolk-500-sc'
+    ScriptType: 'FilePath'
+    ScriptPath: 'wvd_downloading_new_binary_pp.ps1'
+    ScriptArguments: 
+      -VMresourceGroup $(VMresourceGroup) `
+      -SAresourceGroup $(SAresourceGroup) `
+      -storageAccount $(storageAccount) `
+      -container $(container) `
+      -blob $(blob) 
+    azurePowerShellVersion: 'LatestVersion'

@@ -5,7 +5,7 @@ Add-WindowsFeature -Name Web-Server -IncludeAllSubFeature
 Remove-Item C:\inetpub\wwwroot\* -Recurse -Force
 
 # download website zip
-$ZipBlobUrl = 'https://storageitorian.blob.core.windows.net/re-deploy-app/Website-Update1.zip'
+$ZipBlobUrl = 'https://lvolklab01.blob.core.windows.net/re-deploy-app/Website-Update1.zip'
 $ZipBlobDownloadLocation = 'D:\Website-Update1.zip'
 (New-Object System.Net.WebClient).DownloadFile($ZipBlobUrl, $ZipBlobDownloadLocation)
 
