@@ -28,6 +28,7 @@ Update-AzVmss `
     -VirtualMachineScaleSet $vmss
 
 #### !!! Update Notepad++ to v 8.2.1
+#### !!! Update WebSite
 
 $vmss = Get-AzVmss `
     -ResourceGroupName "myResourceGroup" `

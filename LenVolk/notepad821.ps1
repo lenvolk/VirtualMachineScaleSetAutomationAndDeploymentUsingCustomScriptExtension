@@ -1,3 +1,6 @@
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls, [Net.SecurityProtocolType]::Tls11, [Net.SecurityProtocolType]::Tls12, [Net.SecurityProtocolType]::Ssl3
+[Net.ServicePointManager]::SecurityProtocol = "Tls, Tls11, Tls12, Ssl3"
+
 invoke-webrequest -uri 'https://pic.lvolk.com/npp.8.2.1.exe' -OutFile 'c:\temp\npp.8.2.1.exe'
 
 Add-Content -LiteralPath C:\New-Binary.log "downloaded notepad v 8.2.1 to c:\temp"
