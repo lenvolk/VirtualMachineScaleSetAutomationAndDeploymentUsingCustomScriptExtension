@@ -1,0 +1,1 @@
+Start-Process -filepath "C:\temp\Software\npp.7.8.8.Installer.exe" -Wait -ErrorAction Stop -ArgumentList '/S'
