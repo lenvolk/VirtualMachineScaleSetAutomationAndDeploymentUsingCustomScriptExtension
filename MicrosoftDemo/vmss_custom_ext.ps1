@@ -4,16 +4,23 @@
 $rgname = "vmLab-lod32098045"
 $location = "westus"
 $vmssname = "labVmss"
+$sku = "Standard_D2_v3"
+$user = "AdminUser"
+$vmPassword = ConvertTo-SecureString "55w@rd1234" -AsPlainText -Force
+$vmCred = New-Object System.Management.Automation.PSCredential($user, $vmPassword)
 $vnetname = "vmssLabvNet"
 $subnetname = "AppSubnet"
 $pipname = "piplb"
 $lbname = "labVmsslb"
 
 
+
 New-AzVmss `
     -ResourceGroupName $rgname `
     -VMScaleSetName $vmssname `
     -Location $location `
+    -VmSize $sku `
+    -Credential $vmCred `
     -VirtualNetworkName $vnetname `
     -SubnetName $subnetname `
     -PublicIpAddressName $pipname `
@@ -47,7 +54,7 @@ $vmss = Add-AzVmssExtension `
 # Update the scale set and apply the Custom Script Extension to the VM instances
 Update-AzVmss `
     -ResourceGroupName $rgname `
-    -Name $vmssname`
+    -Name $vmssname `
     -VirtualMachineScaleSet $vmss
 
 
