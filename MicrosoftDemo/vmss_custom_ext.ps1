@@ -1,14 +1,23 @@
 # step by step from example https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/tutorial-install-apps-powershell#update-app-deployment
 
 
+$rgname = "myResourceGroup"
+$location = "westus"
+$vmssname = "myScaleSet"
+$vnetname = "myVnet"
+$subnetname = "mySubnet"
+$pipname = "myPublicIPAddress"
+$lbname = "myLoadBalancer"
+
+
 New-AzVmss `
-    -ResourceGroupName "myResourceGroup" `
-    -VMScaleSetName "myScaleSet" `
-    -Location "EastUS" `
-    -VirtualNetworkName "myVnet" `
-    -SubnetName "mySubnet" `
-    -PublicIpAddressName "myPublicIPAddress" `
-    -LoadBalancerName "myLoadBalancer" `
+    -ResourceGroupName $rgname `
+    -VMScaleSetName $vmssname`
+    -Location $location `
+    -VirtualNetworkName $vnetname `
+    -SubnetName $subnetname `
+    -PublicIpAddressName $pipname `
+    -LoadBalancerName $lbname `
     -UpgradePolicyMode "Automatic"
 
 # manually create web_nsg
@@ -23,8 +32,8 @@ $customConfig = @{
 
 # Get information about the scale set
 $vmss = Get-AzVmss `
-    -ResourceGroupName "myResourceGroup" `
-    -VMScaleSetName "myScaleSet"
+    -ResourceGroupName $rgname `
+    -VMScaleSetName "$vmssname"
 
 # Add the Custom Script Extension to install IIS and configure basic website
 $vmss = Add-AzVmssExtension `
@@ -37,12 +46,12 @@ $vmss = Add-AzVmssExtension `
 
 # Update the scale set and apply the Custom Script Extension to the VM instances
 Update-AzVmss `
-    -ResourceGroupName "myResourceGroup" `
-    -Name "myScaleSet" `
+    -ResourceGroupName $rgname `
+    -Name $vmssname`
     -VirtualMachineScaleSet $vmss
 
 
-Get-AzPublicIpAddress -ResourceGroupName "myResourceGroup" | Select IpAddress
+Get-AzPublicIpAddress -ResourceGroupName $rgname | Select IpAddress
 
 # Now let's update the VMSS application
 
@@ -52,15 +61,15 @@ $customConfigv2 = @{
 }
 
 $vmss = Get-AzVmss `
-    -ResourceGroupName "myResourceGroup" `
-    -VMScaleSetName "myScaleSet"
+    -ResourceGroupName $rgname `
+    -VMScaleSetName "$vmssname"
  
 $vmss.VirtualMachineProfile.ExtensionProfile[0].Extensions[0].Settings = $customConfigv2
  
 Update-AzVmss `
-    -ResourceGroupName "myResourceGroup" `
-    -Name "myScaleSet" `
+    -ResourceGroupName $rgname `
+    -Name $vmssname`
     -VirtualMachineScaleSet $vmss
 
 # Clean up
-Remove-AzResourceGroup -Name "myResourceGroup" -Force -AsJob
+Remove-AzResourceGroup -Name $rgname -Force -AsJob
