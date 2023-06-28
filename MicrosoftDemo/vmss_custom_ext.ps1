@@ -1,13 +1,13 @@
 # step by step from example https://docs.microsoft.com/en-us/azure/virtual-machine-scale-sets/tutorial-install-apps-powershell#update-app-deployment
 
 
-$rgname = "myResourceGroup"
+$rgname = "vmLab-lod32098045"
 $location = "westus"
-$vmssname = "myScaleSet"
-$vnetname = "myVnet"
-$subnetname = "mySubnet"
-$pipname = "myPublicIPAddress"
-$lbname = "myLoadBalancer"
+$vmssname = "labVmss"
+$vnetname = "vmssLabvNet"
+$subnetname = "AppSubnet"
+$pipname = "piplb"
+$lbname = "labVmsslb "
 
 
 New-AzVmss `
