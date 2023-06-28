@@ -7,7 +7,7 @@ $vmssname = "labVmss"
 $vnetname = "vmssLabvNet"
 $subnetname = "AppSubnet"
 $pipname = "piplb"
-$lbname = "labVmsslb "
+$lbname = "labVmsslb"
 
 
 New-AzVmss `
