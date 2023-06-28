@@ -12,7 +12,7 @@ $lbname = "labVmsslb"
 
 New-AzVmss `
     -ResourceGroupName $rgname `
-    -VMScaleSetName $vmssname`
+    -VMScaleSetName $vmssname `
     -Location $location `
     -VirtualNetworkName $vnetname `
     -SubnetName $subnetname `
