@@ -7,7 +7,7 @@ $vmssname = "labVmss"
 $sku = "Standard_D2_v3"
 $user = "AdminUser"
 $vmPassword = ConvertTo-SecureString "55w@rd1234" -AsPlainText -Force
-#P@55word1234 
+# P@55word1234 
 $vmCred = New-Object System.Management.Automation.PSCredential($user, $vmPassword)
 $vnetname = "vmssLabvNet"
 $subnetname = "AppSubnet"
